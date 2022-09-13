@@ -6,11 +6,11 @@
 </head>
 <body>
 <h1>
-	Hello world!  
+	관리자 페이지  
 </h1>
 
-<img src="/ggg/img/air.jpg" >
+<P> ${hello} </P>
 <img src="/img/air.jpg" >
-<P>  The time on the server is ${serverTime}. </P>
+
 </body>
 </html>

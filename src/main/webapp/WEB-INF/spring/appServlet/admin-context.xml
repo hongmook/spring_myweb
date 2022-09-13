@@ -12,17 +12,16 @@
 	<annotation-driven />
 
 	<!-- css, js, img -->
-	
 	<resources mapping="/css/**" location="/resources/css/" />
 	<resources mapping="/img/**" location="/resources/img/" />
 	<resources mapping="/js/**" location="/resources/js/" />
 
-	<!-- /WEB-INF/views/user/home.jsp  -->
+	<!-- /WEB-INF/views/admin/home.jsp  -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<beans:property name="prefix" value="/WEB-INF/views/user/" />
+		<beans:property name="prefix" value="/WEB-INF/views/admin/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="com.khm.www" />
+	<context:component-scan base-package="com.khm.controller.admin" />
 	
 </beans:beans>
