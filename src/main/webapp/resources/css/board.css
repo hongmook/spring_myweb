@@ -1,0 +1,109 @@
+@charset "UTF-8";
+
+table.c {
+  border-collapse: collapse;
+  text-align: center;
+  line-height: 2;
+  width:100%;
+}
+
+table.c thead th{
+  padding: 10px;
+  font-weight: bold;
+  color: #369;
+  border-bottom: 3px solid #036;
+}
+
+.c thead tr:hover, .c tbody tr:hover {
+  background: lightgray;
+}
+
+table.c tbody th:hover{
+  background: lightgray;
+}
+
+table.c td {
+  width: 350px;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+#b {
+	width:100px;	
+}
+
+.c a:link {
+  color: black;
+  text-decoration: none;
+}
+.c a:visited {
+  color: blue;
+  text-decoration: none;
+}
+.c a:hover {
+  color: red;
+  text-decoration: none;
+}
+
+.nbsp{
+	text-align:center
+}
+
+#reg{
+	float:right;
+	width:50px;
+	height:30px;
+}
+
+.contain{
+	position:fixed;
+	background: #ffffff;
+	border: solid 1px gray;
+	top: 50%;
+	left: 50%;
+	width: 25%;
+	height: 30%;
+	transform: translate(-50%, -50%);
+}
+
+table.detail {
+  border-collapse: collapse;
+  text-align: center;
+  line-height: 2;
+  width:100%;
+}
+
+table.detail thead th{
+  padding: 10px;
+  font-weight: bold;
+  color: #369;
+  border-bottom: 3px solid #036;
+}
+
+table.detail td {
+  width: 350px;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.reply {
+	font-size : 20
+}
+
+.pagination {
+  display: inline-block;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+.pagination a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}

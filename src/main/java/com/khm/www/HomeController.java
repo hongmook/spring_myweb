@@ -27,6 +27,7 @@ public class HomeController {
 		
 		model.addAttribute("serverTime", formattedDate );
 		
+		//리턴값이 view파일이름
 		return "home";
 	}
 	
