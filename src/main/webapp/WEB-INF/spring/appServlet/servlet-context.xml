@@ -13,9 +13,9 @@
 
 	<!-- css, js, img -->
 	
-	<resources mapping="/css/**" location="/resources/css/" />
-	<resources mapping="/img/**" location="/resources/img/" />
-	<resources mapping="/js/**" location="/resources/js/" />
+	<resources mapping="/css/**" location="/css/" />
+	<resources mapping="/img/**" location="/img/" />
+	<resources mapping="/js/**" location="/js/" />
 
 	<!-- /WEB-INF/views/user/home.jsp  -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
