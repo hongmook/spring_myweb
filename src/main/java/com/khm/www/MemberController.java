@@ -21,11 +21,13 @@ public class MemberController {
 	
 	//post 맵핑
 	@PostMapping("register")
-	public void register(Member member) {
+	public String register(Member member) {
 		logger.info("회원가입처리 맵핑");
 		
 		logger.info("아이디 : {}", member.getId());
 		logger.info("이름 : {}", member.getName());
+		
+		return "redirect:/";
 	}
 
 }
