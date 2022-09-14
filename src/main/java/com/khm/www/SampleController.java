@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.khm.dto.Member;
@@ -18,10 +19,11 @@ public class SampleController {
 		logger.info("doA called..");
 	}
 	
-	//리턴타입 String
+	//리턴타입 String, get방식으로 받아오기(modelattribute??)
 	@RequestMapping("doB")
-	public String doB(Model model) {
+	public String doB(@ModelAttribute("msg") String message, Model model) {
 		logger.info("doB called..");
+		logger.info("doB called.. {}", message);
 		
 		Member m = new Member();
 		m.setId("joy");
@@ -33,5 +35,9 @@ public class SampleController {
 		//jsp이름
 		return "result";
 	}
-
+	
+	
+	
+	
+	
 }
