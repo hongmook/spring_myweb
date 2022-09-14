@@ -12,6 +12,7 @@
 </h1>
 ${msg } <br>
 아이디 : ${member.id } <br>
-이름 : ${member.name }
+이름 : ${member.name } <br>
+타이틀 : ${board.title }
 </body>
 </html>

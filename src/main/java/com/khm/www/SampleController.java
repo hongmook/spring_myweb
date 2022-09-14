@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.khm.dto.Board;
 import com.khm.dto.Member;
 
 @Controller
@@ -30,6 +31,11 @@ public class SampleController {
 		m.setName("홍길동");
 		
 		model.addAttribute("member", m);
+		
+		Board b = new Board();
+		b.setTitle("자바");
+		// 키를 던지지 않을때는 타입의 첫글자를 소문자로 바꿔서 view page에서 사용 가능 ex) Board -> board
+		model.addAttribute(b);
 		model.addAttribute("msg", "곧 점심시간");
 		
 		//jsp이름

@@ -17,7 +17,7 @@
       <h2>회원가입</h2>
       <hr>
       <div> 
-	      <form name="memRegform" method="post" action="memberReg.do" onsubmit="return formCheck()">
+	      <form name="memRegform" method="post" action="/member/register" onsubmit="return formCheck()">
 	      <div class="b">
 	      	<input name="id" type="text" placeholder="아이디" maxlength="10" required onchange="idcheck()"><P>
 	      	<input type="hidden" id="isidcheck">
