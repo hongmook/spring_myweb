@@ -14,7 +14,7 @@
 <div class="row">
   <div class="leftcolumn">
     <div class="card">
-      <h2>회원가입</h2>
+      <h2>${msg }</h2>
       <hr>
       <div> 
 	      <form name="memRegform" method="post" action="/member/register" onsubmit="return formCheck()">

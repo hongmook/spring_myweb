@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.khm.dto.Board;
@@ -18,8 +19,14 @@ public class SampleController {
 	private static final Logger logger = LoggerFactory.getLogger(SampleController.class);
 
 	@RequestMapping("doA")
-	public void doo() {
+	public ModelAndView doo() {
+		
 		logger.info("doA called..");
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("/member/memregform");
+		mv.addObject("msg", "회원가입 폼");
+		
+		return mv;
 	}
 	
 	//리턴타입 String, get방식으로 받아오기(modelattribute??)
