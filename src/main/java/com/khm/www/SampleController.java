@@ -14,5 +14,7 @@ public class SampleController {
 	public void doo() {
 		logger.info("doA called..");
 	}
+	
+	
 
 }
