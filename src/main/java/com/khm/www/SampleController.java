@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.khm.dto.Board;
@@ -59,5 +60,21 @@ public class SampleController {
 		
 		return "redirect:/doA";
 	}
+	
+	//json 라이브러리 추가
+	@RequestMapping("doJASON")
+	public @ResponseBody Member dojson() {
+		Member m = new Member();
+		m.setId("joy");
+		m.setHobby("테니스, 골프");
+		m.setName("홍길동");
+		
+		return m;
+	}
+	
+	
+	
+	
+	
 	
 }
