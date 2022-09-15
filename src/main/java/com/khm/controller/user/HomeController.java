@@ -1,4 +1,4 @@
-package com.khm.www;
+package com.khm.controller.user;
 
 import java.text.DateFormat;
 import java.util.Date;

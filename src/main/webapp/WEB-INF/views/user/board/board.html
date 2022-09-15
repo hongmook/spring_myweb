@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="/page/css/page.css">
+	<link rel="stylesheet" href="/page/css/board.css">
+	<script src="/page/js/formCheck.js"></script>
+	<script src="https://kit.fontawesome.com/737ede07db.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<div class="header">
+  <h1>Rama</h1>
+  <p>welcom to my homepage</p>
+</div>
+
+<div class="topnav">
+  <a href="/page/">홈</a>
+  <a href="#">메뉴</a>
+  <a href="/page/board/board.html">게시판</a>
+  <a href="#">마이페이지</a>
+  <a id="modal1" href="javascript:login()">로그인</a>
+</div>
+
+<div class="row">
+  <div class="leftcolumn">
+    <div class="card">
+    	<h1><i class="fa-solid fa-clipboard-list"></i>&nbsp;게시판</h1>
+    <hr>
+    	<table class="c">
+			  <thead>
+				  <tr>
+				    <th id="b">순번</th>
+				    <th>제목</th>
+				    <th>작성일자</th>
+				    <th>조회수</th>
+				  </tr>
+			  </thead>
+			  <tbody>
+				  <tr>
+				    <td id="b">1</td>
+				    <td><a href="#">제목</a></td>
+				    <td>작성일자</td>
+				    <td>조회수</td>
+				  </tr>
+				  <tr>
+				    <td id="b">2</td>
+				    <td><a href="#">제목</a></td>
+				    <td>작성일자</td>
+				    <td>조회수</td>
+				  </tr>
+				  <tr>
+				    <td id="b">3</td>
+				    <td><a href="#">제목</a></td>
+				    <td>작성일자</td>
+				    <td>조회수</td>
+				  </tr>
+				  <tr>
+				    <td id="b">4</td>
+				    <td><a href="#">제목</a></td>
+				    <td>작성일자</td>
+				    <td>조회수</td>
+				  </tr>
+				  <tr>
+				    <td id="b">5</td>
+				    <td><a href="#">제목</a></td>
+				    <td>작성일자</td>
+				    <td>조회수</td>
+				  </tr>
+			  </tbody>
+	    </table>
+	 <p>
+	 <p>
+	 <p>
+	    <div class="nbsp">
+		    <a href="#">◀&nbsp;이전&nbsp;&nbsp;</a>
+		    <a href="#">1&nbsp;&nbsp;</a>
+		    <a href="#">2&nbsp;&nbsp;</a>
+		    <a href="#">3&nbsp;&nbsp;</a>
+		    <a href="#">4&nbsp;&nbsp;</a>
+		    <a href="#">5&nbsp;&nbsp;</a>
+		    <a href="#">다음&nbsp;▶</a>
+	    </div>
+    </div>
+  </div>
+  <div class="rightcolumn">
+    <div class="card">
+      <h2>About Me</h2>
+      <div class="fakeimg" style="height:100px;">Image</div>
+      <p>Some text about me in culpa qui officia deserunt mollit anim..</p>
+    </div>
+    <div class="card">
+      <h3>Popular Post</h3>
+      <div class="fakeimg"><p>Image</p></div>
+      <div class="fakeimg"><p>Image</p></div>
+      <div class="fakeimg"><p>Image</p></div>
+    </div>
+    <div class="card">
+      <h3>Follow Me</h3>
+      <p>Some text..</p>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <h2>Footer</h2>
+</div>
+<!-- 화면 끝 -->
+
+<!-- 로그인 팝업 -->
+	<div id="modal" >
+		<div id="container">
+			<a class="a" href="javascript:clo()">X</a>
+		
+			<form method="get" action="loginProc.html">
+				<input type="text" placeholder="아이디" required><br>
+				<input type="password" placeholder="비밀번호" required><p>
+				<input type="submit" value="로그인">
+			</form>
+		
+			<p>
+			<div class="aaa">
+				<a href="/page/member/memregform.html">회원가입</a> | <a href="#">아이디 찾기</a> | <a href="#">비밀번호 찾기</a>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
+
+
+
