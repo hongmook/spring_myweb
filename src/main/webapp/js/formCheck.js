@@ -94,9 +94,13 @@
 		//전송방식, 요청문서, 비동기식 요청
 		x.open("get", "/member/idserch.jsp?id=" + id, true);
 		x.send();
-	*/
+	
 		x.open("get", "/idDoubleCheck.do?id=" + id, true);
 		x.send();
+	*/
+		
+		x.open("get", "/member/idDoubleCheck?id=" + id, true);
+		x.send();	
 	}
 	
 	
