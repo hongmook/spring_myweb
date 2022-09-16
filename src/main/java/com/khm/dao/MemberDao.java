@@ -97,15 +97,9 @@ public class MemberDao {
 
 
 
-	public int insertMember(HttpServletRequest request) {
-		String id = request.getParameter("id");
-		String pw = request.getParameter("pw");
-		String name = request.getParameter("name");
-		String gender = request.getParameter("gender");
-		String[] hobby = request.getParameterValues("hobby");
-		String email = request.getParameter("eid") + "@" + request.getParameter("Domain");
-		String intro = request.getParameter("intro");
-
+	public int insertMember(Member member) {
+//		System.out.println("취미 : " + member.getHobby()[0]);
+		String email = member.getEid() + "@" + member.getDomain();
 		
 		CallableStatement stmt;
 		int rs = 0;
@@ -115,12 +109,15 @@ public class MemberDao {
 			stmt = conn.prepareCall(sql);
 			
 			StructDescriptor st_desc = StructDescriptor.createDescriptor("OBJ_MEMBER", conn);
-			Object[] obj_member = {id, pw, name, gender, email, intro};
+			Object[] obj_member = {member.getId(), member.getPw(), 
+								   member.getName(), member.getGender(), 
+								   email, member.getIntro()
+								  };
 			STRUCT member_rec = new STRUCT(st_desc, conn, obj_member);
 			stmt.setObject(1, member_rec);
 			
 			ArrayDescriptor desc = ArrayDescriptor.createDescriptor("STRING_NT", conn);
-			ARRAY hobby_arr = new ARRAY(desc, conn, hobby); //(타입객체 / 오라클연결 / 던져주는 타입)
+			ARRAY hobby_arr = new ARRAY(desc, conn, member.getHobby()); //(타입객체 / 오라클연결 / 던져주는 타입)
 			stmt.setArray(2, hobby_arr);
 			
 			stmt.registerOutParameter(3, OracleTypes.INTEGER);
@@ -202,7 +199,7 @@ public class MemberDao {
 					}
 					
 					//문자열을 스트링으로 바꿔줌
-					m.setHobby(Arrays.toString(h_val));
+					m.setHobby_str(Arrays.toString(h_val));
 					
 				}
 

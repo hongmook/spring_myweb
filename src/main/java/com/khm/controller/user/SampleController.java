@@ -73,7 +73,7 @@ public class SampleController {
 	public @ResponseBody Member dojson() {
 		Member m = new Member();
 		m.setId("joy");
-		m.setHobby("테니스, 골프");
+		m.setHobby_str("테니스, 골프");
 		m.setName("홍길동");
 		
 		return m;

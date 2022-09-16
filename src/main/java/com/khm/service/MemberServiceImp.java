@@ -3,9 +3,6 @@ package com.khm.service;
 import java.util.List;
 import java.util.Map;
 
-
-import javax.servlet.http.HttpServletRequest;
-
 import com.khm.dao.MemberDao;
 import com.khm.dto.Member;
 
@@ -22,9 +19,9 @@ public class MemberServiceImp implements MemberService {
 	}
 
 	@Override
-	public int insert(HttpServletRequest req) {
+	public int insert(Member member) {
 
-		return dao.insertMember(req);
+		return dao.insertMember(member);
 	}
 
 	@Override

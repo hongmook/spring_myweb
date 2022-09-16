@@ -19,7 +19,8 @@ import com.khm.service.MemberServiceImp;
 public class MemberController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
-
+	MemberService ms = new MemberServiceImp();
+	
 	@RequestMapping("memregform") //default get방식
 	public void memRegForm() {
 		logger.info("회원가입 맵핑");
@@ -33,6 +34,8 @@ public class MemberController {
 		logger.info("아이디 : {}", member.getId());
 		logger.info("이름 : {}", member.getName());
 		
+		ms.insert(member);
+		
 		return "redirect:/";
 	}
 	
@@ -40,7 +43,6 @@ public class MemberController {
 	public ResponseEntity<String> idDoubleCheck(@RequestParam("id") String id) {
 		logger.info("idDoubleCheck called..");
 		
-		MemberService ms = new MemberServiceImp();
 		String rs = Integer.toString(ms.idDoubleCheck(id));
 		
 		return new ResponseEntity<String>(rs, HttpStatus.OK);
