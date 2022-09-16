@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.khm.dto.Member;
 import com.khm.service.MemberService;
@@ -28,13 +29,14 @@ public class MemberController {
 	
 	//post 맵핑
 	@PostMapping("register")
-	public String register(Member member) {
+	public String register(Member member, RedirectAttributes model) {
 		logger.info("회원가입처리 맵핑");
 		
 		logger.info("아이디 : {}", member.getId());
 		logger.info("이름 : {}", member.getName());
 		
 		ms.insert(member);
+		model.addFlashAttribute("msg","memberOk");
 		
 		return "redirect:/";
 	}
