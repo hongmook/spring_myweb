@@ -12,9 +12,12 @@ import oracle.sql.StructDescriptor;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.stereotype.Repository;
+
 import com.khm.common.OracleConn;
 import com.khm.dto.Member;
 
+@Repository
 public class MemberDaoImp implements MemberDao {
 	
 	private final Connection conn = OracleConn.getInstance().getConn();

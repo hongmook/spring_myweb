@@ -2,6 +2,7 @@ package com.khm.controller.user;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,7 @@ public class MemberController {
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
 //	MemberService ms = new MemberServiceImp();
 	
+	@Autowired
 	private MemberService ms;
 	
 	public MemberController(MemberService ms) {
