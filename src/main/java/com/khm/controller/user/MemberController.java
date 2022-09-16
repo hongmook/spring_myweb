@@ -20,7 +20,13 @@ import com.khm.service.MemberServiceImp;
 public class MemberController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MemberController.class);
-	MemberService ms = new MemberServiceImp();
+//	MemberService ms = new MemberServiceImp();
+	
+	private MemberService ms;
+	
+	public MemberController(MemberService ms) {
+		this.ms = ms;
+	}
 	
 	@RequestMapping("memregform") //default get방식
 	public void memRegForm() {

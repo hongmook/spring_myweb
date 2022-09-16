@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.khm.dao.MemberDao;
+import com.khm.dao.MemberDaoImp;
 
 
 @Controller
@@ -28,7 +28,7 @@ public class Login {
 						Model m) {
 //방법2	public String login(Member member) {
 		
-		MemberDao dao = new MemberDao();
+		MemberDaoImp dao = new MemberDaoImp();
 		
 		Map<String, String> map = dao.loginProc(id, pw);
 		

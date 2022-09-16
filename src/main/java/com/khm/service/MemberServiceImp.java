@@ -3,13 +3,17 @@ package com.khm.service;
 import java.util.List;
 import java.util.Map;
 
-import com.khm.dao.MemberDao;
+import com.khm.dao.MemberDaoImp;
 import com.khm.dto.Member;
 
 public class MemberServiceImp implements MemberService {
 
-	MemberDao dao = new MemberDao();
+	private MemberDaoImp dao;
 	
+	public MemberServiceImp(MemberDaoImp dao) {
+		this.dao = dao;
+	}
+
 	@Override
 	public Map<String, String> login(String id, String pw) {
 		//memberdao의 loginproc호출
