@@ -13,6 +13,14 @@
 	<context:component-scan base-package="com.khm.dto" />
 	<context:component-scan base-package="com.khm.service" />
 	
+	<!-- db컨넥션 풀 bean 설정 -->
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+		<property name="username" value="joy"/>
+		<property name="password" value="0070"/>
+	</bean>
+	
 	<!-- 생성자를 이용한 의존성 주입 -->
 <!--
 	<bean id="memberService" class="com.khm.service.MemberServiceImp">

@@ -11,7 +11,9 @@ import oracle.sql.STRUCT;
 import oracle.sql.StructDescriptor;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.khm.common.OracleConn;
@@ -20,16 +22,20 @@ import com.khm.dto.Member;
 @Repository
 public class MemberDaoImp implements MemberDao {
 	
-	private final Connection conn = OracleConn.getInstance().getConn();
-	PreparedStatement stmt = null;
+	@Autowired
+	private DataSource ds;
+	
+//	private final Connection conn = OracleConn.getInstance().getConn();
 	
 	@Override
 	public Map<String, String> loginProc(String id, String pw){
-
+		PreparedStatement stmt = null;
+		Connection conn = null;
 		Map<String, String> map	= new HashMap<String, String>();
 		
 		String sql = "select * from member where id = ?";
 		try {
+			conn = ds.getConnection();
 			stmt = conn.prepareStatement(sql);
 			
 			stmt.setString(1, id);
@@ -61,21 +67,53 @@ public class MemberDaoImp implements MemberDao {
 
 			e.printStackTrace();
 		
-		} 
+		} finally {
+			resourceClose(conn, stmt);
+		}
 		
 		return map;
 
 	}
+	
+	private void resourceClose(Connection conn, PreparedStatement stmt) {
+		//자원반납
+		try {
+			
+			stmt.close();
+			conn.close();
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+	}
+	
+	private void resourceClose(Connection conn, CallableStatement stmt) {
+		//자원반납
+		try {
+			
+			stmt.close();
+			conn.close();
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+	}
 
 	@Override
 	public int insertMember(Member member) {
+		Connection conn = null;
+		CallableStatement stmt = null;
 //		System.out.println("취미 : " + member.getHobby()[0]);
 		String email = member.getEid() + "@" + member.getDomain();
 		
-		CallableStatement stmt;
 		int rs = 0;
 		try {
-
+			conn = ds.getConnection();
+			
 			String sql = "call p_insert_member(?,?,?)";
 			stmt = conn.prepareCall(sql);
 			
@@ -98,6 +136,8 @@ public class MemberDaoImp implements MemberDao {
 		} catch (SQLException e) {
 
 			e.printStackTrace();
+		} finally {
+			resourceClose(conn, stmt);
 		}
 
 		return rs;
@@ -106,12 +146,13 @@ public class MemberDaoImp implements MemberDao {
 
 	@Override
 	public int selectByid(String id) {
-		
+		Connection conn = null;
 		CallableStatement stmt = null;
 		int rs = 0;
 		String sql = "call p_idDoubleCheck(?, ?)";
 		
 		try {
+			conn = ds.getConnection();
 			stmt = conn.prepareCall(sql);
 			
 			stmt.setString(1, id);
@@ -124,7 +165,10 @@ public class MemberDaoImp implements MemberDao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			resourceClose(conn, stmt);
 		}
+		
 		return rs;
 	}
 
@@ -132,12 +176,15 @@ public class MemberDaoImp implements MemberDao {
 	@Override
 	public List<Member> getMember() {
 		CallableStatement stmt = null;
+		Connection conn = null;
 		
 		List<Member> member = new ArrayList<Member>();
 		
 		String sql = "call p_get_member(?)";
 		
 		try {
+			conn = ds.getConnection();
+			
 			stmt = conn.prepareCall(sql);
 			
 			stmt.registerOutParameter(1, OracleTypes.CURSOR);
@@ -181,6 +228,8 @@ public class MemberDaoImp implements MemberDao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} finally {
+			resourceClose(conn, stmt);
 		}
 		
 		return member;
