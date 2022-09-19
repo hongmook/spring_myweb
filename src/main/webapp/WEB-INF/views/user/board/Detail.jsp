@@ -31,7 +31,7 @@
 	<c:set value="${loginUser }" var="user" />
 	
 		<c:if test="${user.id eq board.id}">
-		<button type="button" onclick="location.href='/boardDetail.bo?seqno=${board.seqno}&page=modify'">수정</button>
+		<button type="button" onclick="location.href='/board/detail?seqno=${board.seqno}&page=modify'">수정</button>
 		<button type="button" onclick="del_confirm('${board.seqno}')">삭제</button>
 		</c:if>
 		<hr>

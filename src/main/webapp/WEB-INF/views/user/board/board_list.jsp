@@ -28,21 +28,21 @@
     	<h1><i class="fa-solid fa-clipboard-list"></i>&nbsp;게시판</h1>
     	<c:set value="${loginUser }" var="user" />
     	<c:if test="${user.id != null}">
-			<button type="button" onclick="location.href='boardRegForm.bo'" id="reg"> 등록 </button> <br>   	
+			<button type="button" onclick="location.href='/board/regForm'" id="reg"> 등록 </button> <br>   	
 		</c:if>
     <hr>
     
-    <form name="search" method ="post" action="boardList.bo">
+    <form name="search" method ="post" action="/board/list">
     
-    <input type="hidden" name="currentpage" value="${pageMaker.cri.currentPage }" />
-    	<select name="search_field">
+    <input type="hidden" name="currentPage" value="${pageMaker.cri.currentPage }" />
+    	<select name="searchField">
     		<option value="title" 
     		<c:if test="${pageMaker.cri.searchField == 'title'}">selected</c:if>>제목</option>
     		<option value="name"
     		<c:if test="${pageMaker.cri.searchField == 'name'}">selected</c:if>>이름</option>
     	</select>
     
-		<input type="text" name="search_text" placeholder="search" value="${pageMaker.cri.searchText }">
+		<input type="text" name="searchText" placeholder="search" value="${pageMaker.cri.searchText }">
     	<input type="button" value="검색" onclick="javascript:document.forms['search'].submit()">
     <!-- 페이지당 레코드 수 -->	
     <select name="rowPerPage" onchange="goAction()">
@@ -74,7 +74,7 @@
 			  <tbody>
 
 			<c:forEach items="${board}" var="rs">			  
-				  <tr style="cursor:pointer" onclick="location.href='boardDetail.bo?seqno=${rs.getSeqno()}'">
+				  <tr style="cursor:pointer" onclick="location.href='/board/detail?seqno=${rs.getSeqno()}'">
 				    <td id="b"> ${rs.getNo()}</td>
 				    <td>${rs.getTitle()}</td>
 				    <td>${rs.getWdate()}</td>
@@ -98,15 +98,15 @@
 	 <p>총 레코드개수 : ${pageMaker.totalPage }</p>
 	    <div class="pagination">
 	    <c:if test="${pageMaker.prev }">
-  			<a href="boardList.bo?currentPage=${pageMaker.startPage-1 }&rowPerPage=${pageMaker.cri.rowPerPage}">&laquo;</a>
+  			<a href="/board/list?currentPage=${pageMaker.startPage-1 }&rowPerPage=${pageMaker.cri.rowPerPage}">&laquo;</a>
   		</c:if>	
   			<c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }">
-	  			<a href="boardList.bo?currentPage=${num}&rowPerPage=${pageMaker.cri.rowPerPage }" 
+	  			<a href="/board/list?currentPage=${num}&rowPerPage=${pageMaker.cri.rowPerPage }" 
 	  			 class="${pageMaker.cri.currentPage == num ? "active" : "" }">${num }</a>
   			</c:forEach>
 <!-- <a class="active" href="#">2</a> -->
 	    <c:if test="${pageMaker.next }">
-  			<a href="boardList.bo?currentPage=${pageMaker.endPage+1 }&rowPerPage=${pageMaker.cri.rowPerPage}">&raquo;</a>
+  			<a href="/board/list?currentPage=${pageMaker.endPage+1 }&rowPerPage=${pageMaker.cri.rowPerPage}">&raquo;</a>
   		</c:if>	
 		</div>
 	    

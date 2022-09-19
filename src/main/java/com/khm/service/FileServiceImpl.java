@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.fileupload.FileItem;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.khm.dao.FileDao;
 import com.khm.dto.AttachFile;
@@ -176,6 +177,67 @@ public class FileServiceImpl implements FileService {
 			}
 		}
 		return rs;
+	}
+
+	@Override
+	public AttachFile fileupload(MultipartFile item) {
+		
+		AttachFile attachFile = null;
+				
+		//첨부파일 : 바이너리파일
+		long filesize = item.getSize();
+		System.out.println("업로드한 파일 사이즈 : " + filesize);
+		
+		if(filesize > 0) {
+			String fileUploadPath = "D:/KHM/upload/";
+			String fileName = item.getName();
+			
+			int idx = fileName.lastIndexOf(".");
+			
+			String split_fileName = fileName.substring(0,idx);
+			String split_extension = fileName.substring(idx+1);
+			
+			System.out.println(split_fileName);
+			System.out.println(split_extension);
+			
+			/*
+			//방법2
+			split_fileName = FilenameUtils.getBaseName(fileName);
+			split_extension = FilenameUtils.getExtension(fileName);
+			*/
+			
+			//중복된 파일을 업로드 하지 않기 위해 UID값 생성
+			UUID uid = UUID.randomUUID();
+			String saveFileName = split_fileName + "_" + uid + "." + split_extension;
+			System.out.println("업로드 파일이름 : " + fileName);
+
+			//업로드 파일 저장
+			File file = new File(fileUploadPath + saveFileName);
+			try {
+				item.transferTo(file);;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			attachFile = new AttachFile();
+			attachFile.setFilename(fileName);
+			attachFile.setSavefilename(saveFileName);
+			attachFile.setFilepath(fileUploadPath);
+			attachFile.setFilesize(String.valueOf(filesize));
+			attachFile.setFiletype(item.getContentType());
+			
+			//이미지 파일타입 확인
+			String fileType = item.getContentType();
+			String type = fileType.substring(0, fileType.indexOf("/"));
+			System.out.println("업로드 파일 타입 : " + type);
+
+			if(type.equals("image")) {
+				
+				attachFile.setThumbnail(setThumbnail(file, saveFileName));
+			}
+		}
+		
+		return attachFile;
 	}
 
 

@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.fileupload.FileItem;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.khm.dto.AttachFile;
 import com.khm.dto.Thumbnail;
@@ -13,7 +14,11 @@ import com.khm.dto.Thumbnail;
 
 public interface FileService {
 	
+	//서블릿
 	public AttachFile fileupload(FileItem item);
+
+	//스프링
+	public AttachFile fileupload(MultipartFile item);
 
 	public void fileDown(HttpServletRequest request, HttpServletResponse response);
 

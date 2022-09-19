@@ -6,7 +6,7 @@
 		<div id="container">
 			<a class="a" href="javascript:clo()">X</a>
 		
-			<form method="post" action="login">
+			<form method="post" action="/login">
 				<input name="id" id="id" type="text" placeholder="아이디" required><br>
 				<input name="pw" id="pw" type="password" placeholder="비밀번호" required><p>
 				<input type="submit" value="로그인">

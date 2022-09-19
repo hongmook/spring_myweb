@@ -1,65 +1,84 @@
 package com.khm.controller.user;
 
-
-
 import java.io.IOException;
 import java.util.List;
 
-import javax.management.modelmbean.RequiredModelMBean;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.khm.common.LoginImpl;
 import com.khm.dto.Board;
 import com.khm.dto.Criteria;
 import com.khm.dto.Page;
 import com.khm.service.BoardServiceImp;
 
+@Controller
+@RequestMapping(value="/board/")
+public class BoardController  {
 
-@WebServlet(urlPatterns = {"*.bo"})
-public class BoardController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+	@Autowired
+	BoardServiceImp boardService;
 	
-    public BoardController() {
-
-    }
-
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		doAction(req, resp);
+//	@GetMapping("list")
+//	@PostMapping("list")
+	@RequestMapping(value="list", method= {RequestMethod.POST, RequestMethod.GET})
+	public String list(Criteria cri, Model model) {
+		
+		if(cri.getCurrentPage() == 0) cri.setCurrentPage(1);
+		if(cri.getRowPerPage() == 0) cri.setRowPerPage(3);
+		
+		List<Board> board = boardService.list(cri);
+		model.addAttribute("pageMaker", new Page(boardService.getTotalRec(cri), cri)); //레코드 갯수
+		model.addAttribute("board", board); 
+		
+		return "/board/board_list";
+		
+	}	
+	
+	@GetMapping("detail")
+	public String detail(@RequestParam("seqno") String seqno,
+						Model model,
+						RedirectAttributes rttr) {
+		
+		model.addAttribute("boardDetail", boardService.searchBoard(seqno));
+		
+		return "/board/Detail";
 	}
-
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		doAction(req, resp);
+	
+	@GetMapping("regForm")
+	public void regForm() {
+		
 	}
+	
+	@PostMapping("register")
+	public String register(Board board, 
+						   MultipartFile files, 
+						   HttpSession sess,
+						   RedirectAttributes rttr) {
+		
+		board.setId(((LoginImpl)sess.getAttribute("loginUser")).getId());
+		String seqno = boardService.insertBoard(board, files);
 
-	private void doAction(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String uri = req.getRequestURI();
+		rttr.addFlashAttribute("seqno", seqno);
 		
-//		System.out.println("uri = " + uri + "\t uri.lastIndexOf=" + uri.lastIndexOf("/"));
-		String cmd = uri.substring(uri.lastIndexOf("/")+1);
-		
-//		System.out.println("cmd="+cmd);
-		
-		BoardServiceImp boardService = new BoardServiceImp();
-
-		if(cmd.equals("boardList.bo")) {
-			String searchfield = req.getParameter("search_field");
-			String searchtext = req.getParameter("search_text");
-			String currentPage = req.getParameter("currentPage");
-			String rowPerPage = req.getParameter("rowPerPage");
-			if(currentPage == null) currentPage = "1";
-			if(rowPerPage == null) rowPerPage = "3";
-			Criteria cri = new Criteria(Integer.parseInt(currentPage), Integer.parseInt(rowPerPage));
-			
-			cri.setSearchField(searchfield);
-			cri.setSearchText(searchtext);
-			List<Board> board = boardService.list(cri);
-			req.setAttribute("pageMaker", new Page(boardService.getTotalRec(cri), cri)); //레코드 갯수
-			req.setAttribute("board", board); 
-			goView(req, resp, "/board/board_list.jsp");
+		return "redirect:/board/detail";
+	}
+	
+/*	
 			
 		} else if(cmd.equals("boardDetail.bo")) {
 			
@@ -107,8 +126,8 @@ public class BoardController extends HttpServlet {
 			boardService.reply(seqno);
 			
 		}
-		
 	}
+ */		
 	
 	void goView (HttpServletRequest req, HttpServletResponse resp, String viewPage) throws ServletException, IOException {
 	

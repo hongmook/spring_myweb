@@ -11,16 +11,21 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.khm.common.LoginImpl;
-import com.khm.dao.BoardDao;
+import com.khm.dao.BoardDaoImp;
 import com.khm.dto.AttachFile;
 import com.khm.dto.Board;
 import com.khm.dto.Criteria;
 
-
+@Service
 public class BoardServiceImp implements BoardService {
-	BoardDao boardDao = new BoardDao();
+	
+	@Autowired
+	BoardDaoImp boardDao;
 
 	private static final String CHARSET = "utf-8";
 
@@ -72,7 +77,7 @@ public class BoardServiceImp implements BoardService {
 		LoginImpl login = (LoginImpl)req.getSession().getAttribute("loginUser");
 		board.setId(login.getId());
 		
-		return BoardDao.insert(board, attachFile);
+		return boardDao.insert(board, attachFile);
 		
 	}
 	
@@ -177,8 +182,14 @@ public class BoardServiceImp implements BoardService {
 
 	public void reply(String seqno) {
 		
+	}
+
+	@Override
+	public String insertBoard(Board board , MultipartFile files) {
 		
+		FileService fileservice = new FileServiceImpl();
 		
+		return boardDao.insert(board, fileservice.fileupload(files));
 	}
 
 }
