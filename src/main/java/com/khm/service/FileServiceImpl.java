@@ -190,7 +190,7 @@ public class FileServiceImpl implements FileService {
 		
 		if(filesize > 0) {
 			String fileUploadPath = "D:/KHM/upload/";
-			String fileName = item.getName();
+			String fileName = item.getOriginalFilename();
 			
 			int idx = fileName.lastIndexOf(".");
 			

@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -50,7 +51,7 @@ public class BoardController  {
 	}	
 	
 	@GetMapping("detail")
-	public String detail(@RequestParam("seqno") String seqno,
+	public String detail(@ModelAttribute("seqno") String seqno,
 						Model model,
 						RedirectAttributes rttr) {
 		
@@ -66,12 +67,12 @@ public class BoardController  {
 	
 	@PostMapping("register")
 	public String register(Board board, 
-						   MultipartFile files, 
+						   MultipartFile filename, 
 						   HttpSession sess,
 						   RedirectAttributes rttr) {
 		
 		board.setId(((LoginImpl)sess.getAttribute("loginUser")).getId());
-		String seqno = boardService.insertBoard(board, files);
+		String seqno = boardService.insertBoard(board, filename);
 
 		rttr.addFlashAttribute("seqno", seqno);
 		
