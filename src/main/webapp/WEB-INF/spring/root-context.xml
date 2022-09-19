@@ -21,6 +21,14 @@
 		<property name="password" value="0070"/>
 	</bean>
 	
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="defaultEncoding" value="utf-8" />
+		<property name="maxUploadSize" value="100024000" />
+		<property name="maxUploadSizePerFile" value="10024000" />
+		<property name="maxInMemorySize" value="10024000" />
+		<property name="uploadTempDir" value="file:\\d:\\KHM\\upload\\tmp" />
+	</bean>
+	
 	<!-- 생성자를 이용한 의존성 주입 -->
 <!--
 	<bean id="memberService" class="com.khm.service.MemberServiceImp">
