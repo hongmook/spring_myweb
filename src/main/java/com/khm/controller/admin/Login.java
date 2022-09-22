@@ -1,4 +1,4 @@
-package com.khm.common;
+package com.khm.controller.admin;
 
 import java.util.Map;
 
@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.khm.common.LoginImpl;
 import com.khm.dao.MemberDao;
-import com.khm.dao.MemberDaoImp;
 
 
 @Controller
@@ -29,8 +29,8 @@ public class Login {
 	public String login(@RequestParam("id") String id, 
 						@RequestParam("pw") String pw,
 						HttpSession sess,
-						RedirectAttributes model,
-						Model m) {
+						RedirectAttributes rttr,
+						Model model) {
 //방법2	public String login(Member member) {
 		
 //		MemberDaoImp dao = new MemberDaoImp();
@@ -42,15 +42,16 @@ public class Login {
 			case "ok" : //로그인 성공
 				LoginImpl loginUser = new LoginImpl(id, map.get("name"));
 				sess.setAttribute("loginUser", loginUser);
-				model.addFlashAttribute("msg", "loginOk");
+				model.addAttribute("msg", "loginOk");
 				
-				viewPage = "redirect:/";
+				viewPage = "main";
 				break;
 				
 			default : //로그인실패
-				m.addAttribute("msg", "loginFail");
+				log.info((String) model.getAttribute("msg"));
+				rttr.addFlashAttribute("msg", "loginFail");
 				
-				viewPage = "index";
+				viewPage = "redirect:/admin/";
 		}
 			
 		return viewPage;

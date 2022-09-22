@@ -21,8 +21,6 @@ import com.khm.dto.AttachFile;
 import com.khm.dto.Thumbnail;
 import net.coobird.thumbnailator.Thumbnails;
 
-
-
 public class FileServiceImpl implements FileService {
 
 	FileDao filedao = new FileDao();
