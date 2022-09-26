@@ -91,14 +91,13 @@ function del_confirm(seqno){
 	</div>
 	
 	<hr>
+		<!-- 댓글 등록 폼 -->
+		<div id ="replyInput">
+			<textarea id="comment" name="comment" style="width:100%; height:60px;" rows="5" cols="50" placeholder="댓글을 입력하세요"></textarea>
+			<button id="addReplyBtn">댓글등록</button>
+		</div>
 	
-	<form method="post" action="/replayProc.bo?seqno=${board.seqno}">	
-		<input type="hidden" name="board_seqno" value="">
-		<textarea name="comment" style="width:100%; height:60px;" rows="5" cols="50" placeholder="댓글을 입력하세요"></textarea>
-		<input style="float:right" type="submit" value="등록">
-	</form>
-	
-	
+	<p id="newline" />
 	<table class="detail">
 	<thead>
 		<tr>
@@ -107,6 +106,7 @@ function del_confirm(seqno){
 			<th>작성일자</th>
 		</tr>
 	</thead>
+	
 	<c:set value="${board.reply}" var="reply" />
 	<c:if test="${reply != null}">
 		<c:forEach items="${reply}" var="r">
@@ -142,10 +142,48 @@ function del_confirm(seqno){
   </div>
 </div>
 
+
 <%@ include file="../footer.jsp" %>
 <!-- 화면 끝 -->
 
 <%@ include file="../member/login_modal.jsp" %>
+
+<script type="text/javascript" src="/js/reply.js"></script>
+
+<script>
+/* 즉시 실행 함수(IIFE) 
+ * (function(){
+		 문장;
+ 	})();
+ */
+ 
+ var seqno = '<c:out value="${board.seqno}"/>'
+ var id = '<c:out value="${user.id}"/>'
+ 
+$(document).ready(function(){
+	console.log(replyService)
+	
+	$("#addReplyBtn").on("click", function(e){
+		var comment = document.getElementById("comment").value;
+		
+		/* 변수 객채화 */
+		var reply ={
+		/* dto랑 똑같아야함 : sql이랑 같아야함 */
+			boardNo : seqno,
+			id : id,
+			comment : comment
+		};
+		
+		replyService.add(reply, function(result){ //result는 js에서 정해준 값을 넣어줄수 있음
+			alert("댓글이 등록되었습니다." + result)
+			document.getElementById("comment").value = ""
+//			document.getElementById("newline").innerHTML = "<li>" + reply.comment + "</li>"
+			
+		}); 
+	});
+	
+});
+</script>
 
 </body>
 </html>

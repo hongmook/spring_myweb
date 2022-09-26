@@ -1,5 +1,7 @@
 package com.khm.controller.user;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +58,13 @@ public class MemberController {
 		String rs = Integer.toString(ms.idDoubleCheck(id));
 		
 		return new ResponseEntity<String>(rs, HttpStatus.OK);
+	}
+	
+	@GetMapping("logout")
+	public String logout(HttpSession sess) {
+		sess.invalidate();
+		
+		return "redirect:/";
 	}
 	
 
