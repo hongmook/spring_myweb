@@ -97,7 +97,13 @@ function del_confirm(seqno){
 			<button id="addReplyBtn">댓글등록</button>
 		</div>
 	
-	<p id="newline" />
+	<!-- <p id="newline" /> -->
+
+	<!-- 댓글 리스트 출력 영역  -->
+	<div id="reply-ul">
+
+	</div>
+	
 	<table class="detail">
 	<thead>
 		<tr>
@@ -165,13 +171,29 @@ $(document).ready(function(){
 	
 	console.log("=======================");
 	console.log("Reply get LIST");
-	console.log(replyService.getList);
 	
-	replyService.getList({bno:seqno, page:1}, function(list){
-		for(var i =0, len=list.length || 0; i < len; i++){
-			console.log(list[i]);
+	showList(1);
+	
+	function showList(page){
+		replyService.getList({bno:seqno, page:1}, function(list){
+			
+		/* 댓글이 없는 경우 */
+		if(list == null || list.length==0){
+			$("#reply-ul").html("");
+			return; //리턴만 하면 함수가 종료가 됨
 		}
-	});
+		
+		/* 댓글이 있는 경우 */
+		var str = "";
+			for(var i =0, len=list.length || 0; i < len; i++){
+				console.log(list[i]);
+				str += "<li><div class='replyRow'>" + list[i].rn + " | " + list[i].id;
+				str += " | " + list[i].wdate + " | " + list[i].content + "</div></li>"
+			}
+			
+			$("#reply-ul").html(str);
+		});
+	}
 	
 	$("#addReplyBtn").on("click", function(e){
 		var comment = document.getElementById("comment").value;
@@ -187,7 +209,7 @@ $(document).ready(function(){
 		replyService.add(reply, function(result){ //result는 js에서 정해준 값을 넣어줄수 있음
 			alert("댓글이 등록되었습니다." + result)
 			document.getElementById("comment").value = ""
-//			document.getElementById("newline").innerHTML = "<li>" + reply.comment + "</li>"
+			document.getElementById("newline").innerHTML = "<li>" + reply.comment + "</li>"
 			
 		}); 
 	});
