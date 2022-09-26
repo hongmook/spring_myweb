@@ -31,7 +31,7 @@
 		var bno = param.bno;
 		var page = param.page || 1; //없으면 ||(or 연산자) 초기값 1로 설정
 		
-		$.getJSON("/reply/list" + bno + "/" + page + ".json", function(data){
+		$.getJSON("/reply/list/" + bno + "/" + page + ".json", function(data){
 			if(callback){
 				callback(data);
 			}	

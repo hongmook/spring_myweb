@@ -41,7 +41,7 @@ public class ReplyController {
 					   : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
-	@GetMapping(value="list/{bno}/{page}",
+	@GetMapping(value="list/{bno}/{page}.*",
 				produces = {MediaType.APPLICATION_ATOM_XML_VALUE,
 							MediaType.APPLICATION_JSON_UTF8_VALUE
 				})
@@ -52,9 +52,7 @@ public class ReplyController {
 		log.info("getList..........");
 		Criteria cri = new Criteria(page, 5);
 		
-		service.getList(cri, bno);
-		
-		return null;
+		return new ResponseEntity<>(service.getList(cri, bno), HttpStatus.OK);
 	}
 	
 	

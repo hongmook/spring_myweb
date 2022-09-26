@@ -18,7 +18,7 @@
   			SELECT *
   			FROM(
 	  			SELECT /*+INDEX(reply PK_REPLY)*/
-	  				   rownum as rn, seqno, content, id, 
+	  				   rownum as rn, seqno, content, id, board_seqno,
 	  				   TO_CHAR(wdate, 'YYYY-MM-DD HH:MI:SS') as wdate
 	  			FROM reply
 	  			WHERE board_seqno = #{bno}
