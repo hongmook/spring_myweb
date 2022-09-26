@@ -11,7 +11,7 @@
 	<c:if test="${loginuser != null}">
 		${loginuser.name} 님 어서오세요
 		<a id="modal1" href="/member/mypage.jsp">마이페이지</a>
-		<a id="modal1" href="/logout">로그아웃</a>
+		<a id="modal1" href="/member/logout">로그아웃</a>
 	</c:if>  
 	
 	<c:if test="${loginuser eq null}">
