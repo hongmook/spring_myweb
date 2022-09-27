@@ -39,4 +39,8 @@
   			DELETE FROM reply WHERE seqno = #{rno}
   		</delete>
   		
+  		<select id="getCountByBno" resultType="int">
+			SELECT count(*) FROM reply WHERE board_seqno = #{bno} 		
+  		</select>
+  		
   </mapper>

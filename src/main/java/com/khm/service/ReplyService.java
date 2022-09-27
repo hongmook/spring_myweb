@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.khm.dto.Criteria;
 import com.khm.dto.Reply;
+import com.khm.dto.ReplyPageDTO;
 import com.khm.dto.ReplyVO;
 
 public interface ReplyService {
@@ -12,6 +13,8 @@ public interface ReplyService {
 	public int register(Reply reply);
 
 	public List<ReplyVO> getList(Criteria cri, Long bno);
+	
+	public ReplyPageDTO getListPage(Criteria cri, Long bno);
 
 	public ReplyVO get(Long rno);
 

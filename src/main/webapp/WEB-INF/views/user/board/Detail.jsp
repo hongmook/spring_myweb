@@ -106,6 +106,11 @@ function del_confirm(seqno){
 		</ul>		
 	</div>
 	
+	<!-- 댓글 페이지 리스트 출력 -->
+	<div class="reply-page-list">
+	
+	</div>
+	
 <%-- 	<table class="detail">
 	<thead>
 		<tr>
@@ -211,6 +216,25 @@ $(document).ready(function(){
 		modal.show();
 	});
 	
+	/* 댓글 등록 버튼 클릭 시 */
+	$("#addReplyBtn").on("click", function(e){
+		var comment = document.getElementById("comment").value;
+		
+		/* 변수 객채화 */
+		var reply ={
+		/* dto랑 똑같아야함 : sql이랑 같아야함 */
+			boardNo : seqno,
+			id : id,
+			comment : comment
+		};
+		
+		replyService.add(reply, function(result){ //result는 js에서 정해준 값을 넣어줄수 있음
+			alert(result);
+			document.getElementById("comment").value = ""
+			showList(1);			
+		}); 
+	});
+	
 	/* 댓글 수정버튼 클릭시 */
 	$("#replyModifyBtn").on("click", function(e){
 		console.log("댓글 수정 번호 : " + modal.data("rno"));
@@ -253,33 +277,57 @@ $(document).ready(function(){
 		
 		/* 댓글이 있는 경우 */
 		var str = "";
-			for(var i =0, len=list.length || 0; i < len; i++){
-				console.log(list[i]);
-				str += "<li data-rno='" + list[i].seqno + "'><div class='replyRow'>" + list[i].rn + " | " + list[i].id;
-				str += " | " + list[i].wdate + " | " + list[i].content + "</div></li>"
+			for(var i =0, len=list.list.length || 0; i < len; i++){
+				console.log(list.list[i]);
+				str += "<li data-rno='" + list.list[i].seqno + "'><div class='replyRow'>" + list.list[i].rn + " | " + list.list[i].id;
+				str += " | " + list.list[i].wdate + " | " + list.list[i].content + "</div></li>"
 			}
 			
 			$(".reply_ul").html(str);
 		});
 	}
 	
-	$("#addReplyBtn").on("click", function(e){
-		var comment = document.getElementById("comment").value;
+	showReplyPage(18);
+	/* 댓글 페이지 리스트 출력 */
+	function showReplyPage(replyCnt){
 		
-		/* 변수 객채화 */
-		var reply ={
-		/* dto랑 똑같아야함 : sql이랑 같아야함 */
-			boardNo : seqno,
-			id : id,
-			comment : comment
-		};
+		var currentPage = 1;
 		
-		replyService.add(reply, function(result){ //result는 js에서 정해준 값을 넣어줄수 있음
-			alert("댓글이 등록되었습니다." + result)
-			document.getElementById("comment").value = ""
-			showList(1);			
-		}); 
-	});
+		var endPage = Math.ceil(currentPage/5.0)*5;
+		var startPage = endPage - 4;
+		console.log("endNum : " + endPage);
+		
+		var prev = startPage != 1;
+		var next = false;
+		
+		if(endPage*5 >= replyCnt){
+			endPage = Math.ceil(replyCnt/5.0);
+		}
+		if(endPage*5 < replyCnt){
+			next = true;
+		}
+		
+		var str = "<ul class='pageUL'>"
+		if(prev){
+			str += "<li class='page-link'>";
+			str += "<a href='" + (startPage - 1) + "'> 이전페이지 </a></li>";
+		}
+		
+		for(var i=startPage; i <= endPage; i++){
+			var active = currentPage == i ? "active" : "";
+			str += "<li class = 'page-link " + active + "'>"; //띄어쓰기 주의
+			str += "<a href='" + i + "'>" + i + "</a></li>";
+		}
+		
+		if(next){
+			str += "<li class='page-link'>";
+			str += "<a href='" + (endPage+1) + "'> 다음페이지 </a></li>";
+		}
+		
+		str += "</ul>"
+		console.log(str);
+		$(".reply-page-list").html(str);
+	}
 	
 });
 </script>

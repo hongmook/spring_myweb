@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.khm.dto.Criteria;
 import com.khm.dto.Reply;
+import com.khm.dto.ReplyPageDTO;
 import com.khm.dto.ReplyVO;
 import com.khm.service.ReplyService;
 
@@ -35,28 +36,28 @@ public class ReplyController {
 	
 	@PostMapping(value="add", 
 				 consumes = "application/json",
-				 produces = {MediaType.TEXT_PLAIN_VALUE})
+				 produces = "text/plain; charset=utf-8")
 	public ResponseEntity<String> create(@RequestBody Reply reply) {
 		log.info("ReplyController create() called.." + reply);
 		
 		int rs = service.register(reply);
 		
-		return rs == 1 ? new ResponseEntity<>("성공", HttpStatus.OK) 
+		return rs == 1 ? new ResponseEntity<>("댓글 등록이 되었습니다.", HttpStatus.OK) 
 					   : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
 	@GetMapping(value="list/{bno}/{page}.*",
-				produces = {MediaType.APPLICATION_ATOM_XML_VALUE,
+				produces = {MediaType.APPLICATION_XML_VALUE,
 							MediaType.APPLICATION_JSON_UTF8_VALUE
 				})
-	public ResponseEntity<List<ReplyVO>> replylist(
+	public ResponseEntity<ReplyPageDTO> replylist(
 										@PathVariable("bno") Long bno,
 										@PathVariable("page") int page) {
 		
 		log.info("getList..........");
 		Criteria cri = new Criteria(page, 5);
 		
-		return new ResponseEntity<>(service.getList(cri, bno), HttpStatus.OK);
+		return new ResponseEntity<>(service.getListPage(cri, bno), HttpStatus.OK);
 	}
 	
 	@GetMapping(value="{rno}.*",
