@@ -97,14 +97,16 @@ function del_confirm(seqno){
 			<button id="addReplyBtn">댓글등록</button>
 		</div>
 	
-	<!-- <p id="newline" /> -->
-
 	<!-- 댓글 리스트 출력 영역  -->
-	<div id="reply-ul">
-
+	<div id="reply-list">
+		<ul class="reply_ul">
+			<li data-rno='58'>
+				<div>작성자 | 작성일자 | 댓글내용</div>
+			</li>
+		</ul>		
 	</div>
 	
-	<table class="detail">
+<%-- 	<table class="detail">
 	<thead>
 		<tr>
 			<th>작성자</th>
@@ -125,7 +127,7 @@ function del_confirm(seqno){
 			</tbody>	
 		</c:forEach>
  	</c:if>
-	</table>
+	</table> --%>
 	</div>
   </div>
   
@@ -151,6 +153,21 @@ function del_confirm(seqno){
 
 <%@ include file="../footer.jsp" %>
 <!-- 화면 끝 -->
+	
+	<!-- 댓글 모달 -->
+	<div id="reply_modal">
+		<div id="modal2" >
+			<div id="container2">
+				<!-- <a class="a" href="javascript:clo()">X</a> -->
+				<button class="a" id="modalCloseBtn">&#10062;</button>
+
+				<textarea name="content" rows="5" cols="30"></textarea>
+
+				<button id="replyModifyBtn">댓글수정</button>
+				<button id="replyDeleteBtn">댓글삭제</button>
+			</div>
+		</div>
+	</div>
 
 <%@ include file="../member/login_modal.jsp" %>
 
@@ -172,6 +189,57 @@ $(document).ready(function(){
 	console.log("=======================");
 	console.log("Reply get LIST");
 	
+	var modal = $("#reply_modal");
+	var modal_content = modal.find("textarea[name='content']");
+	
+	modal.hide();
+	
+	$("#modalCloseBtn").on("click", function(e){
+		modal.hide();
+	});
+	
+	$(".reply_ul").on("click","li",function(e){
+		
+		var rno = $(this).data("rno");
+		replyService.get(rno, function(data){
+			console.log("REPLY GET DATA")
+			console.log("댓글" + rno + "번 내용 : " + data.content);
+			modal_content.val(data.content);
+			modal.data("rno", data.seqno);			
+		});
+		
+		modal.show();
+	});
+	
+	/* 댓글 수정버튼 클릭시 */
+	$("#replyModifyBtn").on("click", function(e){
+		console.log("댓글 수정 번호 : " + modal.data("rno"));
+		console.log("댓글 수정 내용 : " + modal_content.val());
+		
+		var reply = {seqno : modal.data("rno"), 
+					 content : modal_content.val() };
+		
+		replyService.update(reply, function(result){
+			alert(result);
+			modal.hide();
+			showList(1);
+		});
+	});
+	
+	/* 댓글 삭제 */
+	$("#replyDeleteBtn").on("click", function(e){
+		var rno = modal.data("rno");
+		console.log("댓글 삭제 번호 : " + rno);
+		
+		replyService.remove(rno, function(result){
+			alert(result);
+			modal.hide();
+			showList(1);
+		});
+		
+	});
+	
+	
 	showList(1);
 	
 	function showList(page){
@@ -179,7 +247,7 @@ $(document).ready(function(){
 			
 		/* 댓글이 없는 경우 */
 		if(list == null || list.length==0){
-			$("#reply-ul").html("");
+			$(".reply_ul").html("");
 			return; //리턴만 하면 함수가 종료가 됨
 		}
 		
@@ -187,11 +255,11 @@ $(document).ready(function(){
 		var str = "";
 			for(var i =0, len=list.length || 0; i < len; i++){
 				console.log(list[i]);
-				str += "<li><div class='replyRow'>" + list[i].rn + " | " + list[i].id;
+				str += "<li data-rno='" + list[i].seqno + "'><div class='replyRow'>" + list[i].rn + " | " + list[i].id;
 				str += " | " + list[i].wdate + " | " + list[i].content + "</div></li>"
 			}
 			
-			$("#reply-ul").html(str);
+			$(".reply_ul").html(str);
 		});
 	}
 	

@@ -27,4 +27,16 @@
   		]]>	
   		</select>
   		
+  		<select id="read" resultType="com.khm.dto.ReplyVO">
+  			SELECT * FROM reply WHERE seqno=#{rno}
+  		</select>
+  		
+  		<update id="update">
+  			update reply set content = #{content} where seqno = #{seqno}
+  		</update>
+  		
+  		<delete id="delete">
+  			DELETE FROM reply WHERE seqno = #{rno}
+  		</delete>
+  		
   </mapper>

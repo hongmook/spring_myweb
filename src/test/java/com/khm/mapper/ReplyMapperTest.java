@@ -33,7 +33,7 @@ public class ReplyMapperTest {
 		
 		mapper.insert(r);
 	}
-*/	
+
 	@Test
 	public void testList() {
 		Criteria cri = new Criteria(1,5);
@@ -45,6 +45,19 @@ public class ReplyMapperTest {
 		}
 		
 	}
+	*/	
+	
+	@Test
+	public void testUpdate() {
+		ReplyVO vo = new ReplyVO();
+		vo.setSeqno(58L);
+		vo.setContent("댓글수정합니다");
+
+		int count = mapper.update(vo);
+	
+		log.info("update count : "+count);
+	}
+	
 	
 
 }

@@ -15,4 +15,11 @@ public interface ReplyMapper {
 	public List<ReplyVO> getList(
 			@Param("cri") Criteria cri,
 			@Param("bno") Long bno); //마이바티스 어노테이션
+
+	public ReplyVO read(Long rno);
+
+	public int update(ReplyVO vo);
+
+	public int delete(Long rno);
+
 }
