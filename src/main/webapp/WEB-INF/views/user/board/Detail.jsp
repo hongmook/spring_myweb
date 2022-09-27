@@ -277,8 +277,7 @@ $(document).ready(function(){
 		replyService.add(reply, function(result){ //result는 js에서 정해준 값을 넣어줄수 있음
 			alert("댓글이 등록되었습니다." + result)
 			document.getElementById("comment").value = ""
-			document.getElementById("newline").innerHTML = "<li>" + reply.comment + "</li>"
-			
+			showList(1);			
 		}); 
 	});
 	
