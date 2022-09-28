@@ -296,7 +296,7 @@ $(document).ready(function(){
 	
 	
 	/* 댓글 페이지 리스트 출력 */
-	function showReplyPage(replyCnt, currentPage){
+	function showReplyPage(replyCnt){
 		
 //		var currentPage = 1;
 		
