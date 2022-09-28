@@ -199,6 +199,10 @@ $(document).ready(function(){
 	
 	modal.hide();
 	
+	
+	showList(1);
+	var currentPage = 1;
+	
 	$("#modalCloseBtn").on("click", function(e){
 		modal.hide();
 	});
@@ -231,7 +235,7 @@ $(document).ready(function(){
 		replyService.add(reply, function(result){ //result는 js에서 정해준 값을 넣어줄수 있음
 			alert(result);
 			document.getElementById("comment").value = ""
-			showList(1);			
+			showList(-1);			
 		}); 
 	});
 	
@@ -246,7 +250,7 @@ $(document).ready(function(){
 		replyService.update(reply, function(result){
 			alert(result);
 			modal.hide();
-			showList(1);
+			showList(currentPage);
 		});
 	});
 	
@@ -258,21 +262,25 @@ $(document).ready(function(){
 		replyService.remove(rno, function(result){
 			alert(result);
 			modal.hide();
-			showList(1);
+			showList(currentPage);
 		});
 		
 	});
 	
-	
-	showList(1);
-	
-	var currentPage = 1;
+
 	
 	function showList(page){
 		replyService.getList({bno:seqno, page:page || 1}, function(replyCnt, list){
 			
 		console.log("댓글 수 : " + replyCnt);	
-			
+		
+		/* 댓글이 등록된 경우 */
+		if(page == -1){
+			currentPage = Math.ceil(replyCnt/5.0)
+			showList(currentPage);
+			return;
+		}
+		
 		/* 댓글이 없는 경우 */
 		if(list == null || list.length==0){
 			$(".reply_ul").html("");
