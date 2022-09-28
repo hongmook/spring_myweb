@@ -33,7 +33,7 @@
 		
 		$.getJSON("/reply/list/" + bno + "/" + page + ".json", function(data){
 			if(callback){
-				callback(data);
+				callback(data.replyCnt, data.list);
 			}	
 			
 		}).fail(function(xhr, status, err){//.fail은 실패하면 실행
