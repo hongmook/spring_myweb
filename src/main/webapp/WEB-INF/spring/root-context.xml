@@ -25,9 +25,9 @@
 		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
 	-->
 		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
-		<property name="url" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:xe" />
-		<property name="username" value="joy" />
-		<property name="password" value="0070" />
+		<property name="url" value="jdbc:log4jdbc:oracle:thin:@192.168.10.135:1521:cre8" />
+		<property name="username" value="joy2" />
+		<property name="password" value="joy" />
 	</bean>
 	
 	<!-- mybatis-spring 연동 -->
@@ -36,14 +36,14 @@
 		<property name="mapperLocations" value="classpath:mappers/**/*Mapper.xml" />
 	</bean>
 	
-	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+<!-- 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="defaultEncoding" value="utf-8" />
 		<property name="maxUploadSize" value="104857600" />
 		<property name="maxUploadSizePerFile" value="10485760" />
 		<property name="maxInMemorySize" value="10485760" />
 		<property name="uploadTempDir" value="file:\\d:\\KHM\\upload\\tmp" />
 	</bean>
-	
+	 -->
 	<!-- 생성자를 이용한 의존성 주입 -->
 <!--
 	<bean id="memberService" class="com.khm.service.MemberServiceImp">
