@@ -57,7 +57,7 @@ public class RestControllerSample {
    }
    @GetMapping(value ="getMap" )
    public Map<String,Board> getMap(){
-      Map<String,Board> map = new HashMap<>();
+      Map<String,Board> map = new HashMap<String, Board>();
       map.put("First", bs.searchBoard("1"));
       map.put("Second", bs.searchBoard("2"));
       return map;
