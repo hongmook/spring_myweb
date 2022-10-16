@@ -23,7 +23,7 @@ public class JDBCTest {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			
 			Connection conn = DriverManager.getConnection(
-					"jdbc:oracle:thin:@localhost:1521:xe",
+					"jdbc:oracle:thin:@192.168.10.246:1521:xe",
 					"joy",
 					"0070");
 			log.info(conn.toString());

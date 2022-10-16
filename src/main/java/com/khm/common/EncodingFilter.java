@@ -16,14 +16,14 @@ public class EncodingFilter implements Filter {
 	@Override
 	public void init(FilterConfig fConfig) throws ServletException {
 		
-		this.encoding = fConfig.getInitParameter("encoding"); //"encoding"은 web.xml에 있는 init-param를 적어줌
-		System.out.println(fConfig.getFilterName() + "필터가 시작되었습니다.");
+		this.encoding = fConfig.getInitParameter("encoding"); //"encoding"�� web.xml�뿉 �엳�뒗 init-param瑜� �쟻�뼱以�
+//		System.out.println(fConfig.getFilterName() + "�븘�꽣媛� �떆�옉�릺�뿀�뒿�땲�떎.");
 	}
 
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		
 		if(encoding != null) {
-			//요청과 응답을 모두 encoding을 사용하겠다고 설정
+			//�슂泥�怨� �쓳�떟�쓣 紐⑤몢 encoding�쓣 �궗�슜�븯寃좊떎怨� �꽕�젙
 			request.setCharacterEncoding(encoding);
 			response.setCharacterEncoding(encoding);
 		}

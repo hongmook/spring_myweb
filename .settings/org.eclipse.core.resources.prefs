@@ -1,4 +1,8 @@
 eclipse.preferences.version=1
+encoding//src/main/java/com/khm/common/EncodingFilter.java=UTF-8
+encoding//src/main/java/com/khm/common/LoggingFilter.java=UTF-8
+encoding//src/main/java/com/khm/controller/user/FileController.java=UTF-8
+encoding//src/main/java/com/khm/service/FileService.java=UTF-8
 encoding//src/main/webapp/WEB-INF/views/admin/home.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/user/doA.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/user/home.jsp=UTF-8
