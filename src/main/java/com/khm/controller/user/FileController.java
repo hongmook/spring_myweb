@@ -9,10 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.stereotype.Controller;
+
 import com.khm.service.FileService;
 import com.khm.service.FileServiceImpl;
 
-
+@Controller
 @WebServlet("/file/*")
 public class FileController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -50,7 +52,7 @@ public class FileController extends HttpServlet {
 				
 				int rs = fileservice.delete(no, savefilename, filepath, thumb_filename);
 				
-				System.out.println("파일삭제결과 : "+rs);
+				System.out.println("�뙆�씪�궘�젣寃곌낵 : "+rs);
 
 			PrintWriter out;
 			try {

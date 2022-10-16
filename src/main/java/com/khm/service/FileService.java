@@ -14,10 +14,10 @@ import com.khm.dto.Thumbnail;
 
 public interface FileService {
 	
-	//서블릿
+	//�꽌釉붾┸
 	public AttachFile fileupload(FileItem item);
 
-	//스프링
+	//�뒪�봽留�
 	public AttachFile fileupload(MultipartFile item);
 
 	public void fileDown(HttpServletRequest request, HttpServletResponse response);

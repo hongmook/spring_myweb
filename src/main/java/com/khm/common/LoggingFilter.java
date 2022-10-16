@@ -35,19 +35,22 @@ public class LoggingFilter extends HttpFilter implements Filter {
 		String path = ((HttpServletRequest)request).getContextPath();
 		String uri = ((HttpServletRequest)request).getRequestURI();
 		String cmd = uri.substring(uri.lastIndexOf("/")+1);
-		writer.printf("path : %s, uri : %S, cmd : %s, \n", path,uri,cmd);
+//		System.out.println("path : " + path);
+//		System.out.println("uri : " + uri);
+//		System.out.println("cmd : " + cmd);
+//		writer.printf("path : %s, uri : %S, cmd : %s, \n", path,uri,cmd);
 		
 		GregorianCalendar now = new GregorianCalendar();
-		writer.printf("접근시간 : %TF, %TT %n", now, now);
+//		writer.printf("�젒洹쇱떆媛� : %TF, %TT %n", now, now);
 		
 		String addr = request.getRemoteAddr();
 		int port = request.getRemotePort();
-		writer.printf("접근한주소 : %s\\n, 접근포트: %d\n", addr, port);
+//		writer.printf("�젒洹쇳븳二쇱냼 : %s\\n, �젒洹쇳룷�듃: %d\n", addr, port);
 		
 		chain.doFilter(request, response);
 		
 		long end = System.currentTimeMillis();
-		writer.printf("응답시간 : %d ms \n", (end - begin));
+//		writer.printf("�쓳�떟�떆媛� : %d ms \n", (end - begin));
 
 	}
 
@@ -58,7 +61,7 @@ public class LoggingFilter extends HttpFilter implements Filter {
 		try {
 			writer = new PrintWriter(new FileWriter("d:\\KHM\\log\\" + filename + ".log", true), true);
 		} catch (IOException e) {
-			System.out.println("로그 파일 생성 오류");
+			System.out.println("너는 무슨 에러니?");
 		}
 
 	}

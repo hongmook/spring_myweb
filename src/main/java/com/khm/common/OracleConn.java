@@ -40,7 +40,6 @@ public class OracleConn {
 			
 			Class.forName(driver);
 			conn = DriverManager.getConnection(url,id,pw);
-			System.out.println("오라클 연결완료");
 			
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
