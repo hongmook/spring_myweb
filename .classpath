@@ -30,18 +30,15 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-<<<<<<< HEAD
-	<classpathentry kind="lib" path="/Users/kanghongmook/ojdbc8.jar">
-=======
-	<classpathentry kind="lib" path="D:/oracle/sqldeveloper-21.4.3.063.0100-x64/sqldeveloper/jdbc/lib/ojdbc8.jar">
->>>>>>> branch 'master' of https://github.com/hongmook/spring_myweb.git
-		<attributes>
-			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/oracle/sqldeveloper-21.4.3.063.0100-x64/sqldeveloper/jdbc/lib/ojdbc8.jar">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4">
@@ -49,13 +46,5 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-<<<<<<< HEAD
-=======
-	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4">
-		<attributes>
-			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
-		</attributes>
-	</classpathentry>
->>>>>>> branch 'master' of https://github.com/hongmook/spring_myweb.git
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

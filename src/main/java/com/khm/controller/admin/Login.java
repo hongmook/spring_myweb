@@ -31,7 +31,7 @@ public class Login {
 						HttpSession sess,
 						RedirectAttributes rttr,
 						Model model) {
-//방법2	public String login(Member member) {
+//諛⑸쾿2	public String login(Member member) {
 		
 //		MemberDaoImp dao = new MemberDaoImp();
 		
@@ -39,7 +39,7 @@ public class Login {
 		
 		String viewPage = null;	
 		switch(map.get("login")) {
-			case "ok" : //로그인 성공
+			case "ok" : //濡쒓렇�씤 �꽦怨�
 				LoginImpl loginUser = new LoginImpl(id, map.get("name"));
 				sess.setAttribute("loginUser", loginUser);
 				model.addAttribute("msg", "loginOk");
@@ -47,8 +47,8 @@ public class Login {
 				viewPage = "main";
 				break;
 				
-			default : //로그인실패
-				log.info((String) model.getAttribute("msg"));
+			default : //濡쒓렇�씤�떎�뙣
+	//			log.info((String) model.getAttribute("msg"));
 				rttr.addFlashAttribute("msg", "loginFail");
 				
 				viewPage = "redirect:/admin/";
