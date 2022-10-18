@@ -12,6 +12,9 @@
 		${loginuser.name} 님 어서오세요
 		<a id="modal1" href="/member/mypage.jsp">마이페이지</a>
 		<a id="modal1" href="/member/logout">로그아웃</a>
+		<a class="chat" href="/chat">채팅</a>
+<!-- 		<a class="chat" href="/chatList">채팅리스트</a>
+		<a class="chat" href="/chat3">1:1채팅</a> -->
 	</c:if>  
 	
 	<c:if test="${loginuser eq null}">

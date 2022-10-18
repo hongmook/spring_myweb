@@ -43,7 +43,7 @@
 		<property name="maxInMemorySize" value="10485760" />
 		<property name="uploadTempDir" value="file:\\d:\\KHM\\upload\\tmp" />
 	</bean>
-	 
+	
 	<!-- 생성자를 이용한 의존성 주입 -->
 <!-- 
 	<bean id="memberService" class="com.khm.service.MemberServiceImp">
