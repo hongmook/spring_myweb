@@ -1,6 +1,7 @@
 package com.khm.controller.user;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
@@ -18,9 +19,11 @@ public class ChatController  {
 		return "chat/chatList";
 	}
 	
-	@GetMapping("/chat3")
-	public String mychat() {
-		
-		return "chat/chat3";
+	@GetMapping("/chat2")
+	public String chat2(String chatNo, Model model) {
+
+//		System.out.println("채팅방 번호 : " + chatNo);
+		model.addAttribute("chatNo", chatNo);
+		return "chat/chat2";
 	}
 }
